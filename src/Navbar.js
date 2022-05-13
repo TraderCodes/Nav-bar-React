@@ -6,6 +6,19 @@ import logo from './logo.svg';
 const Navbar = () => {
    // 【set to show links when clicked 】
    const [showlinks, setShowLinks] = useState(false);
+   const linksContainerRef = useRef(null);
+   const linksRef = useRef(null);
+   // everytime the link is called
+   useEffect(() => {
+      const linksHeights = linksRef.current.getBoundingClientRect().height;
+      if (showlinks) {
+         linksContainerRef.current.style.height = `${linksHeights}px`;
+        //  else if not showlinks then height = 0 so it hides it 
+      } else {
+         linksContainerRef.current.style.height = '0px';
+      }
+   }, [showlinks]);
+
    return (
       <nav>
          <div className="nav-center">
@@ -20,14 +33,8 @@ const Navbar = () => {
             </div>
             {/* if showlink is true show the container */}
 
-            <div
-               className={`${
-                  showlinks
-                     ? 'links-container show-container'
-                     : 'links-container'
-               }`}
-            >
-               <ul className="links">
+            <div className="links-container" ref={linksContainerRef}>
+               <ul className="links" ref={linksRef}>
                   {links.map((link) => {
                      // destructure
                      const { id, url, text } = link;
