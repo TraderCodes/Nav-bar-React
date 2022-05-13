@@ -19,21 +19,26 @@ const Navbar = () => {
                </button>
             </div>
             {/* if showlink is true show the container */}
-            {showlinks && (
-               <div className="links-container show-container">
-                  <ul className="links">
-                     {links.map((link) => {
-                        // destructure
-                        const { id, url, text } = link;
-                        return (
-                           <li key={id}>
-                              <a href={url}>{text}</a>
-                           </li>
-                        );
-                     })}
-                  </ul>
-               </div>
-            )}
+
+            <div
+               className={`${
+                  showlinks
+                     ? 'links-container show-container'
+                     : 'links-container'
+               }`}
+            >
+               <ul className="links">
+                  {links.map((link) => {
+                     // destructure
+                     const { id, url, text } = link;
+                     return (
+                        <li key={id}>
+                           <a href={url}>{text}</a>
+                        </li>
+                     );
+                  })}
+               </ul>
+            </div>
 
             <ul className="social-icons">
                {/* destructure */}
